@@ -69,6 +69,12 @@ This declaration whitelists the `name`, `emails` and `friends` attributes. It is
 
 Thanks to Nick Kallen for the permit idea!
 
+In order to use `accepts_nested_attribute_for` with Strong Parameters, you will need to specify which nested attributes should be whitelisted. It's mandatory to specify the nested attributes that should be whitelisted. If you use `permit` with just the key that points to the nested attributes hash, it will return an empty hash.
+
+``` ruby
+params.require(:person).permit(:name, :age, pets_attributes: [ :name, :category ])
+```
+
 ## Handling of Unpermitted Keys
 
 By default parameter keys that are not explicitly permitted will be logged in the development and test environment. In other environments these parameters will simply be filtered out and ignored.
